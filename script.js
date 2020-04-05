@@ -6,14 +6,15 @@ window.onload = async function(){
       addButton.innerHTML = "Find me a dog";
       addButton.addEventListener('click', async function(){
         // Delete all existing posts
-        let arePosts = document.getElementById("allThePosts");
-        if (arePosts != null){
-          arePosts.remove();
-        };
 
         // Scrape Reddit
         let r = await fetch('https://www.reddit.com/r/dogpics/.json');
         let responseJSON = await r.json();
+
+        let arePosts = document.getElementById("myPicHere");
+        if (arePosts != null){
+          arePosts.remove();
+        };
 
         // Determine which picture to show
         let numberPics = responseJSON.data.children.length;
@@ -21,7 +22,7 @@ window.onload = async function(){
 
         // Display all posts
         let postHolder = document.createElement('div');
-        postHolder.setAttribute("id","allThePosts");
+        postHolder.setAttribute("id","myPicHere");
         console.log(picNumber);
         console.log(responseJSON.data.children[picNumber].data.thumbnail);
         
